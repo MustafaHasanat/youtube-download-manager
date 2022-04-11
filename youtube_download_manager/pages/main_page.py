@@ -11,26 +11,23 @@ from pages.settings_page import SettingsPage
 
 class MainWindow:
     
-    def __init__(self):
-        self.wind = Tk()
-        self.wind.title("YouTube Download Manager")       
-        self.wind.resizable(0, 0)
+    def __init__(self, master, tools):
+        self.wind = master
+        self.tools = tools
         
-        self.screen_width = self.wind.winfo_screenwidth()
-        self.screen_height = self.wind.winfo_screenheight()
+        self.screen_width = tools.screen_width
+        self.screen_height = tools.screen_height
         
-        new_height = int(self.screen_height*0.85)
-        new_width = int(self.screen_width*0.85)
-        new_height_offset = int(self.screen_height*0.05)
-        new_width_offset = int(self.screen_width*0.075)
+        new_height = int(tools.screen_height*0.85)
+        new_width = int(tools.screen_width*0.85)
+        new_height_offset = int(tools.screen_height*0.05)
+        new_width_offset = int(tools.screen_width*0.075)
 
         self.wind.geometry(f"{new_width}x{new_height}+{new_width_offset}+{new_height_offset}")
         
         self.font = ("Berlin Sans FB", 20)
-        self.palette =  {"purple": "#8A39E1", 
-                        "green": "#62BAAC",
-                        "light-green": "#C3FCF1",
-                        "dark-green": "#4B8078"}
+        
+        self.palette = tools.palette
         
         self._LeftFrame()
         self._RightFrame()
@@ -67,20 +64,12 @@ class MainWindow:
         self.about_author.place(relx=0.5, rely=0.49, anchor="center")
         self.settings.place(relx=0.5, rely=0.56, anchor="center")
         
-        def mask_circle_transparent(pil_img, blur_radius, offset=0):
-            offset = blur_radius * 2 + offset
-            mask = Image.new("L", pil_img.size, 0)
-            draw = ImageDraw.Draw(mask)
-            draw.ellipse((offset, offset, pil_img.size[0] - offset, pil_img.size[1] - offset), fill=255)
-            mask = mask.filter(ImageFilter.GaussianBlur(blur_radius))
-            result = pil_img.copy()
-            result.putalpha(mask)
-            return result
+        
         
         
         self.image = Image.open(r"youtube_download_manager\assets\author.png")
         self.image = self.image.resize((int(self.screen_width*0.07), int(self.screen_width*0.07)))
-        self.image = mask_circle_transparent(self.image, 1.5)
+        self.image = self.tools.mask_circle_transparent(self.image, 1.5)
         self.author_photo = ImageTk.PhotoImage(self.image)
         author_image = Label(self.left_frame, image=self.author_photo, bg=self.palette["purple"])
         author_image.place(relx=0.5, rely=0.7, anchor="center")
@@ -129,11 +118,11 @@ class MainWindow:
         
         # self.style.theme_use("yummy")
         
-        HomePage(self.home_frame, self.palette, width=int(self.screen_width*0.6), height=int(self.screen_height*0.65))
-        DownloadPage(self.download_frame, self.palette)
-        AboutAuthorPage(self.about_author_frame, self.palette)
-        AppInfoPage(self.app_info_frame, self.palette)
-        SettingsPage(self.settings_frame, self.palette)
+        HomePage(self.home_frame, self.tools)
+        DownloadPage(self.download_frame, self.tools)
+        AboutAuthorPage(self.about_author_frame, self.tools)
+        AppInfoPage(self.app_info_frame, self.tools)
+        SettingsPage(self.settings_frame, self.tools)
         
     def _HomeButton(self):
         self.current_page.select(0)
@@ -183,5 +172,4 @@ class MainWindow:
         self.app_info.config(bg=self.palette["purple"], fg=self.palette["light-green"])
         self.about_author.config(bg=self.palette["purple"], fg=self.palette["light-green"])
         self.settings.config(bg=self.palette["light-green"], fg=self.palette["dark-green"])
-        
 
