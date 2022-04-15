@@ -128,13 +128,3 @@ class AboutAuthorPage:
         self.website.pack(padx=50, pady=20)
         
         
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        

@@ -31,7 +31,7 @@ class AppInfoPage:
         self.language.pack(side="top", pady=10)
         
         # create the programming modules label and pack it into the page frame
-        self.modules = Label(self.page, text="--- Modules ---\ntkinter - pafy - PIL - webbrowser - urllib - io", 
+        self.modules = Label(self.page, text="--- Modules ---\ntkinter-pafy-PIL-webbrowser-urllib-io-threading", 
                              justify="center", font=("Berlin Sans FB", 25), bg=tools.palette["green"], 
                              fg=tools.palette["light-green"])
         self.modules.pack(side="top", pady=10)
