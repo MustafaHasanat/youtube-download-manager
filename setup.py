@@ -9,15 +9,15 @@ classifiers = [
 ]
 
 setup(
- 	name="my project 1",
+ 	name="youtube-download-manager",
  	version="1.0",
- 	description="a description for the project",
+ 	description="A GUI that used to download videos from youtube",
 	long_description=open("README.md").read() + "\n\n" + open("CHANGELOG.txt").read(), 
- 	url="www.project1.com",
- 	author="my name",
-	author_email="me@gmail.com",
+ 	url="https://github.com/Mustfa1999/youtube-download-manager",
+ 	author="Mustafa Alhasanat",
+	author_email="mustafa.hasanat99@gmail.com",
  	classifiers= classifiers,
- 	keywords="word1, word2",
+ 	keywords="GUI, youtube, download, video, music, mp3, mp4, download manager, downloader, downloader gui",
  	packages=find_packages(),
- 	install_requires=["paffy", "tkinter"]
+ 	install_requires=["paffy", "tkinter", "PIL", "webbrowser", "urllib", "io", "threading"],
 )
