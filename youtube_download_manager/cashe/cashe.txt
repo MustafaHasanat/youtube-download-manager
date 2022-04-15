@@ -1,0 +1,2 @@
+default downloading path >.\youtube_download_manager\downloads
+default downloading type >Video
